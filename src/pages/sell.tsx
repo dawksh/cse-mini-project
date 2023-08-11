@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
+import Sell from './components/Sell.component'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +17,7 @@ export default function Home() {
             </Head>
             <main className={`${styles.main} ${inter.className}`}>
                 <h1>Sell E-Waste</h1>
-                {/* TODO: Add a component in loop fetching data from db to buy data */}
+                <Sell></Sell>
             </main>
         </>
     )
