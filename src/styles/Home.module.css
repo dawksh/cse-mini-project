@@ -212,28 +212,26 @@
 	padding: 1rem 2rem;
 }
 
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-	.grid {
-		grid-template-columns: repeat(2, 50%);
-	}
+.card {
+	border: 1px solid #ddd;
+	padding: 2rem;
+	border-radius: 0.5rem;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	margin: 1rem 0.5rem 0 0.5rem;
 }
 
-@media (prefers-color-scheme: dark) {
-	.vercelLogo {
-		filter: invert(1);
-	}
-
-	.logo {
-		filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
-	}
+.title {
+	font-size: 1.5rem;
+	margin-bottom: 0.5rem;
 }
 
-@keyframes rotate {
-	from {
-		transform: rotate(360deg);
-	}
-	to {
-		transform: rotate(0deg);
-	}
+.content {
+	font-size: 1rem;
+	color: #666;
+}
+
+.layout {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }

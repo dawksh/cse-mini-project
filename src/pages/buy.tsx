@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
+import Buy from './components/Buy.card'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,14 @@ export default function Home() {
             <main className={`${styles.main} ${inter.className}`}>
                 <h1>Buy E-Waste</h1>
                 {/* TODO: Add a component in loop fetching data from db to buy data */}
+                <div className={styles.layout}>
+
+                    {Array.from("ajsinksds").map((el, idx) => {
+                        return (
+                            <Buy key={idx} title='Computer' content='Waste Computer' img='https://i.imgur.com/YAgAmLV.png' />
+                        )
+                    })}
+                </div>
             </main>
         </>
     )
