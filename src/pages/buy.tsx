@@ -3,10 +3,23 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Link from 'next/link'
 import Buy from './components/Buy.card'
+import { useEffect, useState } from 'react'
+import supabase from '@/lib/supabase'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+    const [data, setData] = useState<any>();
+    const fetchData = async () => {
+        const { data: buyData, error } = await supabase.from("products").select("*").limit(10)
+        if (!error && buyData.length != 0) {
+            setData(buyData)
+        }
+        console.log(data)
+    }
+    useEffect(() => {
+        fetchData()
+    }, [])
     return (
         <>
             <Head>
@@ -20,9 +33,9 @@ export default function Home() {
                 {/* TODO: Add a component in loop fetching data from db to buy data */}
                 <div className={styles.layout}>
 
-                    {Array.from("ajsinksds").map((el, idx) => {
+                    {data && data.map((el: any) => {
                         return (
-                            <Buy key={idx} title='Computer' content='Waste Computer' img='https://i.imgur.com/YAgAmLV.png' />
+                            <Buy key={el.id} title={el.name} content={el.description} img={el.image} />
                         )
                     })}
                 </div>
