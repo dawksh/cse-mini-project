@@ -1,8 +1,8 @@
-import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import Image from 'next/image'
 import { useState } from 'react'
+import supabase from '@/lib/supabase'
+import { toast } from 'react-hot-toast'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,11 +11,26 @@ export default function Sell() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [email, setEmail] = useState('');
     const [image, setImage] = useState<any>();
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
-        // You can add your form submission logic here
+        const reader = new FileReader()
+        reader.onloadend = async function () {
+            await supabase.from("products").insert({
+                name,
+                description,
+                image: reader.result,
+                contact_details: {
+                    email
+                }
+            })
+
+            toast.success("Data Saved!")
+        }
+        reader.readAsDataURL(image)
+
     };
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
@@ -48,6 +63,16 @@ export default function Sell() {
                 required
             />
 
+            <label htmlFor="email" className={styles.label}>Email:</label>
+            <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className={styles.input}
+                required
+            />
+
             <label htmlFor="image" className={styles.label}>Image:</label>
             <input
                 type="file"
@@ -57,6 +82,7 @@ export default function Sell() {
                 className={styles.input}
                 required
             />
+
 
             <button type="submit" className={styles.button}>
                 Submit
