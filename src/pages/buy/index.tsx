@@ -36,7 +36,7 @@ export default function Home() {
                     {data && data.map((el: any) => {
                         return (
                             <Link href={`/buy/${el.id}`}>
-                                <Buy key={el.id} title={el.name} content={el.description} img={el.image} />
+                                <Buy key={el.id} title={el.name} content={el.description} img={el.image} price={el.details.price} />
                             </Link>
                         )
                     })}
