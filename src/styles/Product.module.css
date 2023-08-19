@@ -1,0 +1,26 @@
+/* components/ProductModal.module.css */
+.productPage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+}
+
+.image {
+	max-width: 100%;
+	height: auto;
+}
+
+.name {
+	font-size: 1.5rem;
+	margin: 10px 0;
+}
+
+.description {
+	margin-bottom: 10px;
+}
+
+.details {
+	font-size: 0.8rem;
+	color: #666;
+}
