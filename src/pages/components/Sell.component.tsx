@@ -29,7 +29,8 @@ export default function Sell() {
                 },
                 details: {
                     year,
-                    condition
+                    condition,
+                    price
                 }
             })
             toast.success("Data Saved!")
