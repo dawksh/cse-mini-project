@@ -13,6 +13,8 @@ export default function Sell() {
     const [price, setPrice] = useState('');
     const [email, setEmail] = useState('');
     const [image, setImage] = useState<any>();
+    const [year, setYear] = useState<any>();
+    const [condition, setCondition] = useState<string>("Good")
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -24,9 +26,12 @@ export default function Sell() {
                 image: reader.result,
                 contact_details: {
                     email
+                },
+                details: {
+                    year,
+                    condition
                 }
             })
-
             toast.success("Data Saved!")
         }
         reader.readAsDataURL(image)
@@ -72,6 +77,25 @@ export default function Sell() {
                 className={styles.input}
                 required
             />
+
+            <label htmlFor="year" className={styles.label}>Year of Buying:</label>
+            <input
+                type="number"
+                max={2023}
+                id="year"
+                value={year}
+                onChange={(e) => setYear(e.target.value)}
+                className={styles.input}
+                required
+            />
+
+            <label htmlFor="condition" className={styles.label}>Physical Condition:</label>
+
+            <select name="condition" id="condition" className={styles.condition} onChange={(e) => setCondition(e.target.value)}>
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Bad">Bad</option>
+            </select>
 
             <label htmlFor="image" className={styles.label}>Image:</label>
             <input
