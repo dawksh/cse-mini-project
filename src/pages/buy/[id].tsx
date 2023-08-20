@@ -4,6 +4,10 @@ import styles from "@/styles/Product.module.css";
 import { useRouter } from "next/router";
 import supabase from "@/lib/supabase";
 import { toast } from "react-hot-toast";
+import Link from "next/link";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ['latin'] })
 
 const ProductPage = () => {
     const router = useRouter();
@@ -39,9 +43,10 @@ const ProductPage = () => {
                         height="400px"
                         className={styles.image}
                     />
-                    <h2 className={styles.name}>{product.name}</h2>
-                    <p className={styles.description}>{product.description}</p>
-                    <p className={styles.details}>
+                    <h2 className={`${styles.name} ${inter.className}`}>{product.name}</h2>
+                    <p className={`${styles.description} ${inter.className}`}>{product.description}</p>
+                    <button className={styles.button} ><Link href={`mailto:${product.contact_details.email}`}>Contact Owner</Link></button>
+                    <p className={`${styles.details} ${inter.className}`}>
                         Year of Build: {product.details.year} | Condition:{" "}
                         {product.details.condition}
                     </p>
