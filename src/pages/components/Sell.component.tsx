@@ -15,8 +15,10 @@ export default function Sell() {
     const [image, setImage] = useState<any>();
     const [year, setYear] = useState<any>();
     const [condition, setCondition] = useState<string>("Good")
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e: any) => {
+        setLoading(true)
         e.preventDefault();
         const reader = new FileReader()
         reader.onloadend = async function () {
@@ -33,6 +35,7 @@ export default function Sell() {
                     price
                 }
             })
+            setLoading(false)
             toast.success("Data Saved!")
         }
         reader.readAsDataURL(image)
@@ -109,8 +112,8 @@ export default function Sell() {
             />
 
 
-            <button type="submit" className={styles.button}>
-                Submit
+            <button type="submit" className={styles.button} disabled={loading}>
+                {loading ? "Uploading Data" : "Submit Data"}
             </button>
         </form>
     )
