@@ -10,13 +10,14 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
     const [data, setData] = useState<any>();
-    const [open, setOpen] = useState<Boolean>(false)
+    const [loading, setLoading] = useState<Boolean>(false)
     const fetchData = async () => {
+        setLoading(true)
         const { data: buyData, error } = await supabase.from("products").select("*").limit(10)
         if (!error && buyData.length != 0) {
             setData(buyData)
         }
-        console.log(data)
+        setLoading(false)
     }
     useEffect(() => {
         fetchData()
@@ -31,15 +32,18 @@ export default function Home() {
             </Head>
             <main className={`${styles.main} ${inter.className}`}>
                 <h1>Buy E-Waste</h1>
-                {/* TODO: Add a component in loop fetching data from db to buy data */}
                 <div className={styles.layout}>
-                    {data && data.map((el: any) => {
-                        return (
-                            <Link href={`/buy/${el.id}`}>
-                                <Buy key={el.id} title={el.name} content={el.description} img={el.image} price={el.details.price} />
-                            </Link>
-                        )
-                    })}
+                    {loading ? "Loading" : (
+                        <div className={styles.layout}>
+                            {data && data.map((el: any) => {
+                                return (
+                                    <Link href={`/buy/${el.id}`}>
+                                        <Buy key={el.id} title={el.name} content={el.description} img={el.image} price={el.details.price} />
+                                    </Link>
+                                )
+                            })}
+                        </div>
+                    )}
                 </div>
             </main>
         </>
